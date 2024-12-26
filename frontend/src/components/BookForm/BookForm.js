@@ -18,12 +18,13 @@ const BookForm = () => {
       //create new object and add id to the chosen book
       ...randomBook,
       id: uuidv4(),
+      isFavorite: false,
     };
     dispatch(addBook(randomBookWithId)); // add book to library
     //console.log(randomIndex);
   };
 
-  const handleSubmit = (e) => {
+  const handleAddBook = (e) => {
     e.preventDefault();
 
     if (title && author) {
@@ -32,6 +33,7 @@ const BookForm = () => {
         title,
         author,
         id: uuidv4(),
+        isFavorite: false,
       };
 
       dispatch(addBook(book));
@@ -44,7 +46,7 @@ const BookForm = () => {
   return (
     <div className="app-block book-form">
       <h2>Add a new Book</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAddBook}>
         <div>
           <label htmlFor="title">Title</label>
           <input
