@@ -1,14 +1,13 @@
 import * as a from "./ActionTypes";
 
-const initialState = [
-  { author: "Agata", title: "Love and Death" },
-  { author: "Agata", title: "Puaro" },
-];
+const initialState = [];
 
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case a.ADD_Book:
       return [...state, action.payload];
+    case a.DELETE_Book:
+      return state.filter((book) => book.id !== action.payload);
     default:
       return state;
   }
