@@ -1,10 +1,10 @@
-.filter-row {
+.filter_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.filter-group {
+.filter_group {
   flex: 1;
   text-align: center;
 }
@@ -32,12 +32,12 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .filter-row {
+  .filter_row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .filter-group {
+  .filter_group {
     width: 100%;
     margin: auto;
     margin-bottom: 10px;

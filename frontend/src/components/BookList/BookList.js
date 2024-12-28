@@ -5,12 +5,14 @@ import { BsBookmark, BsBookmarkHeart } from "react-icons/bs";
 import {
   selectTitleFilter,
   selectAuthorFilter,
+  selectOnlyFavoriteFilter,
 } from "../../redux/slices/FilterSlice";
 
 export default function BookList() {
   const books = useSelector((state) => state.books); //subscribe component to state;
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
+  const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);
   const dispatch = useDispatch();
 
   const handleDeleteBook = (idToDelete) => {
@@ -28,8 +30,29 @@ export default function BookList() {
     const matchesAuthor = (book.author || "")
       .toLowerCase()
       .includes(authorFilter.toLowerCase());
-    return matchesTitle && matchesAuthor;
+    const matchesFavorite = onlyFavoriteFilter ? book.isFavorite : true;
+    return matchesTitle && matchesAuthor && matchesFavorite;
   });
+
+  const highlightMatch = (text, filter) => {
+    if (!filter) return text;
+
+    text = text || ""; // Ensure text is a string
+    const regex = new RegExp(`(${filter})`, "gi"); // what filter we are looking for
+    console.log(text.split(regex)); // array splitted
+
+    return text.split(regex).map((substring, i) => {
+      if (substring.toLowerCase() === filter.toLowerCase()) {
+        //if substr === filter then highlight
+        return (
+          <span key={i} className="highlight">
+            {substring}//wrap substring into span
+          </span>
+        );
+      }
+      return substring; // Return non-matching substrings as-is
+    });
+  };
 
   return (
     <div className="app-block book-list">
@@ -44,10 +67,11 @@ export default function BookList() {
                 {" "}
                 Book:{" "}
                 <strong>
-                  {book.title}
+                  {highlightMatch(book.title, titleFilter)}
                   <br></br>{" "}
                 </strong>{" "}
-                Author: <strong>{book.author}</strong>
+                Author:{" "}
+                <strong>{highlightMatch(book.author, authorFilter)}</strong>
               </div>
               <div className="book-actions">
                 <span onClick={() => handleToggleFavorite(book.id)}>
@@ -58,7 +82,6 @@ export default function BookList() {
                     <BsBookmark className="star-icon" />
                   )}
                 </span>
-
                 <button onClick={() => handleDeleteBook(book.id)}>
                   Delete
                 </button>

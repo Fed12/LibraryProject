@@ -4,14 +4,18 @@ import {
   setAuthorFilter,
   selectAuthorFilter,
   resetFilters,
+  setOnlyFavoriteFilter,
+  selectOnlyFavoriteFilter,
 } from "../../redux/slices/FilterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import "./Filter.css";
+//import "./Filter.css";
+import styles from "./Filter.module.css";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
+  const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);
 
   const handleTitleFilterChange = (e) => {
     dispatch(setTitleFilter(e.target.value));
@@ -25,28 +29,42 @@ const Filter = () => {
     dispatch(resetFilters());
   };
 
+  const handleOnlyFavoriteFilterChange = (e) => {
+    dispatch(setOnlyFavoriteFilter(e.target.checked));
+  };
+
   return (
-    <div className="app-block book-filter">
+    <div className="app-block filter">
       <h2>Filters</h2>
-      <div className="filter-row">
-        <div className="filter-group">
+      <div className={styles.filter_row}>
+        <div className={styles.filter_group}>
           <input
             type="text"
             value={titleFilter}
             placeholder="Filter by Title..."
             onChange={handleTitleFilterChange}
           />
-          <div className="filter-group">
+        </div>
+        <div className={styles.filter_group}>
+          <input
+            type="text"
+            value={authorFilter}
+            placeholder="Filter by Author..."
+            onChange={handleAuthorFilterChange}
+          />
+        </div>
+        <button type="button" onClick={handleResetAllFilters}>
+          Reset All Filters
+        </button>
+        <div className={styles.filter_group}>
+          <label>
             <input
-              type="text"
-              value={authorFilter}
-              placeholder="Filter by Author..."
-              onChange={handleAuthorFilterChange}
+              type="checkbox"
+              checked={onlyFavoriteFilter}
+              onChange={handleOnlyFavoriteFilterChange}
             />
-          </div>
-          <button type="button" onClick={handleResetAllFilters}>
-            Reset All Filters
-          </button>
+            Only Favorite
+          </label>
         </div>
       </div>
     </div>
