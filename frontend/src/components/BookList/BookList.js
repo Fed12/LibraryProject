@@ -1,7 +1,12 @@
 import "./BookList.css";
-import { deleteBook, toggleFavorite } from "../../redux/Books/ActionCreators";
+//import { deleteBook, toggleFavorite } from "../../redux/Books/ActionCreators";
 import { useDispatch, useSelector } from "react-redux";
 import { BsBookmark, BsBookmarkHeart } from "react-icons/bs";
+import {
+  deleteBook,
+  toggleFavorite,
+  selectBooks,
+} from "../../redux/slices/BooksSlice";
 import {
   selectTitleFilter,
   selectAuthorFilter,
@@ -9,7 +14,7 @@ import {
 } from "../../redux/slices/FilterSlice";
 
 export default function BookList() {
-  const books = useSelector((state) => state.books); //subscribe component to state;
+  const books = useSelector(selectBooks); //subscribe component to state;
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
   const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);
@@ -46,7 +51,7 @@ export default function BookList() {
         //if substr === filter then highlight
         return (
           <span key={i} className="highlight">
-            {substring}//wrap substring into span
+            {substring}
           </span>
         );
       }
