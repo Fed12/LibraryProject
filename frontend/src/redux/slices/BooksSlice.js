@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
-//const initialState = { id: uuidv4(), title: "", author: "", isFavorite: false }; //initial book obj
-const initialState = [];
+const initialState = []; //initial book array
 
 const bookSlice = createSlice({
   name: "book",
