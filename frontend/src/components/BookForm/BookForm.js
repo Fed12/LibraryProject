@@ -25,12 +25,12 @@ const BookForm = () => {
       setTitle("");
       setAuthor("");
     } else {
-      dispatch(setError("You have to provide both fields: title and author"));
+      dispatch(setError("Please, provide both fields: title and author"));
     }
   };
 
   const handleAddRandomBookViaAPI = () => {
-    dispatch(fetchBook());
+    dispatch(fetchBook("http://localhost:4000/random-book")); //set the needed url
   };
 
   return (
