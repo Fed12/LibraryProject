@@ -9,7 +9,7 @@ import {
 } from "../../redux/slices/FilterSlice";
 import { useDispatch, useSelector } from "react-redux";
 //import "./Filter.css";
-import styles from "./Filter.module.css";
+import "./Filter.css";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -36,8 +36,8 @@ const Filter = () => {
   return (
     <div className="app-block filter">
       <h2>Filters</h2>
-      <div className={styles.filter_row}>
-        <div className={styles.filter_group}>
+      <div className="filter_row">
+        <div className="filter_group">
           <input
             type="text"
             value={titleFilter}
@@ -45,7 +45,7 @@ const Filter = () => {
             onChange={handleTitleFilterChange}
           />
         </div>
-        <div className={styles.filter_group}>
+        <div className="filter_group">
           <input
             type="text"
             value={authorFilter}
@@ -56,7 +56,7 @@ const Filter = () => {
         <button type="button" onClick={handleResetAllFilters}>
           Reset All Filters
         </button>
-        <div className={styles.filter_group}>
+        <div className="filter_group">
           <label>
             <input
               type="checkbox"

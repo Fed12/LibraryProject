@@ -14,7 +14,7 @@ import {
 } from "../../redux/slices/FilterSlice";
 
 export default function BookList() {
-  const books = useSelector(selectBooks); //subscribe component to state;
+  const books = useSelector(selectBooks); //subscribe component to state books;
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
   const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);

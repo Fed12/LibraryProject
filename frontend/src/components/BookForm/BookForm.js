@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBook, fetchBook } from "../../redux/slices/BooksSlice";
+import { setError } from "../../redux/slices/ErrorSlice";
 import booksData from "../../data/books.json";
 import "./BookForm.css";
 import createBookWithID from "../../utils/createBookWithID";
@@ -23,6 +24,8 @@ const BookForm = () => {
       dispatch(addBook(createBookWithID({ title, author }, "manual")));
       setTitle("");
       setAuthor("");
+    } else {
+      dispatch(setError("You have to provide both fields: title and author"));
     }
   };
 
